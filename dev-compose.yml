@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13-alpine
+    container_name: db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=liis
+      - POSTGRES_USER=liis
+      - POSTGRES_PASSWORD=liis
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  db-data:
+
