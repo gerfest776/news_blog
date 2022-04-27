@@ -2,7 +2,7 @@
 
 ## URL
 
-* gerfest.site/swagger
+* gerfest.site/swagger -- сервис, задеплоенный на сервере
 
 ### <a name="launch-app"></a> Запуск приложения
  
