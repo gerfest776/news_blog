@@ -30,9 +30,9 @@ class NewsViewSet(
 
     def get_queryset(self):
         if self.action == "news_private":
-            return private_news_list(self.request.user)
+            return private_news_list(self.request.user.id)
         if self.action == "news_edit":
-            return author_article_list(self.request.user)
+            return author_article_list(self.request.user.id)
         return self.queryset
 
     def get_serializer_class(self):

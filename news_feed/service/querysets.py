@@ -6,7 +6,7 @@ def private_news_list(user):
     if Subscription.objects.all().exists() and Article.objects.all().exists():
         authors = list(
             Subscription.objects.prefetch_related("author")
-            .filter(user=user)
+            .filter(user_id=user)
             .first()
             .author.all()
         )
@@ -16,4 +16,4 @@ def private_news_list(user):
 
 
 def author_article_list(user):
-    return Article.objects.filter(author=user)
+    return Article.objects.filter(author_id=user)
