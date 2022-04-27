@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
 import user.permissions
+from news_feed.models import Article
 from news_feed.pagination import Pagination
 from news_feed.serializers import (
     NewsCreateSerializer,
@@ -13,7 +14,6 @@ from news_feed.serializers import (
 )
 from news_feed.service.querysets import (
     author_article_list,
-    news_list,
     private_news_list,
 )
 
@@ -24,7 +24,7 @@ class NewsViewSet(
     ListModelMixin,
     GenericViewSet,
 ):
-    queryset = news_list()
+    queryset = Article.objects.filter(type="open")
     serializer_class = NewsListSerializer
     pagination_class = Pagination
 

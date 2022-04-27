@@ -2,10 +2,6 @@ from news_feed.models import Article
 from user.models import Subscription
 
 
-def news_list():
-    return Article.objects.filter(type="open").select_related("author")
-
-
 def private_news_list(user):
     if Subscription.objects.all().exists() and Article.objects.all().exists():
         authors = list(
