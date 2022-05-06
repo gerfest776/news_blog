@@ -1,7 +1,11 @@
-from rest_framework import permissions, status
+from rest_framework import permissions
 from rest_framework.decorators import action
-from rest_framework.mixins import CreateModelMixin, ListModelMixin, UpdateModelMixin, DestroyModelMixin
-from rest_framework.response import Response
+from rest_framework.mixins import (
+    CreateModelMixin,
+    DestroyModelMixin,
+    ListModelMixin,
+    UpdateModelMixin,
+)
 from rest_framework.viewsets import GenericViewSet
 
 import user.permissions
@@ -12,10 +16,7 @@ from news_feed.serializers import (
     NewsEditSerialzier,
     NewsListSerializer,
 )
-from news_feed.service.querysets import (
-    author_article_list,
-    private_news_list,
-)
+from news_feed.service.querysets import author_article_list, private_news_list
 
 
 class NewsViewSet(
@@ -26,7 +27,7 @@ class NewsViewSet(
     GenericViewSet,
 ):
     queryset = Article.objects.filter(type="open")
-    serializer_class = NewsListSerializer    #
+    serializer_class = NewsListSerializer  #
     pagination_class = Pagination
 
     def get_queryset(self):

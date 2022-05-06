@@ -22,14 +22,13 @@ class NewsCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         if Article.objects.filter(
-                **validated_data, author=self.context["request"].user
+            **validated_data, author=self.context["request"].user
         ).exists():
             raise Exception("That article already exists")
 
         return Article.objects.create(
             **validated_data, author=self.context["request"].user
         )
-
 
 
 class NewsEditSerialzier(serializers.ModelSerializer):

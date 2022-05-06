@@ -71,7 +71,7 @@ SWAGGER_SETTINGS = {
     "SECURITY_DEFINITIONS": {
         "Bearer": {"type": "apiKey", "name": "Authorization", "in": "header"}
     },
-    'USE_SESSION_AUTH': False
+    "USE_SESSION_AUTH": False,
 }
 
 AUTH_USER_MODEL = "user.User"
