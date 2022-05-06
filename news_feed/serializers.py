@@ -11,7 +11,7 @@ class NewsListSerializer(serializers.ModelSerializer):
         fields = ("author", "title", "text", "time_create")
 
 
-class NewsCreateSerializer(serializers.ModelSerializer):
+class NewsCreateOrEditSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = (
@@ -29,14 +29,3 @@ class NewsCreateSerializer(serializers.ModelSerializer):
         return Article.objects.create(
             **validated_data, author=self.context["request"].user
         )
-
-
-class NewsEditSerialzier(serializers.ModelSerializer):
-    class Meta:
-        model = Article
-        fields = ("type", "title", "text")
-        extra_kwargs = {
-            "type": {"required": False},
-            "title": {"required": False},
-            "text": {"required": False},
-        }
