@@ -1,4 +1,3 @@
-from django.db import IntegrityError
 from rest_framework import serializers
 
 from news_feed.models import Article
@@ -22,12 +21,15 @@ class NewsCreateSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
-        try:
-            return Article.objects.create(
+        if Article.objects.filter(
                 **validated_data, author=self.context["request"].user
-            )
-        except IntegrityError as e:
-            raise Exception("That article already exists") from e
+        ).exists():
+            raise Exception("That article already exists")
+
+        return Article.objects.create(
+            **validated_data, author=self.context["request"].user
+        )
+
 
 
 class NewsEditSerialzier(serializers.ModelSerializer):
@@ -39,10 +41,3 @@ class NewsEditSerialzier(serializers.ModelSerializer):
             "title": {"required": False},
             "text": {"required": False},
         }
-
-    def update(self, instance, validated_data):
-        for attr, value in validated_data.items():
-            setattr(instance, attr, value)
-        instance.save()
-
-        return instance
